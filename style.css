@@ -13,3 +13,6 @@ License URI: license.txt
 /*
 * Please add your custom styles below
 */
+h4.widget-title {
+position: relative
+}
