@@ -30,3 +30,7 @@ display: none !important;
 #profile-personal-li{
 display: none !important;
 }
+.bp-user .bp-full-width-profile {
+	background: url(/wp-content/themes/kleo-child/assets/img/defaultcover.jpg) no-repeat center center;
+	background-size: cover;
+}
