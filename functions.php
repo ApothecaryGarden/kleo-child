@@ -112,7 +112,7 @@ function mtollwc_kleo_woo_subscriptions_screen() {
 // Display My Subscriptions screen
 function mtollwc_kleo_woo_subscriptions_screen_content() {
 	echo '<div class="woocommerce">';
-//	wc_get_template( 'myaccount/my-orders.php' );
+	wc_get_template( 'myaccount/subscriptions.php' );
 	echo '</div>';
 }
 
