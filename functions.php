@@ -68,3 +68,63 @@ function kleo_comment_form( $args = array(), $post_id = null ) {
     <?php
     endif;
 }
+
+// Add submenus to Orders tab
+add_action( 'bp_setup_nav', 'mtollwc_kleo_woo_order_submenus' , 302 );
+function mtollwc_kleo_woo_order_submenus() {
+	$bp = buddypress();
+	if(version_compare( BP_VERSION, '2.6', '>=' )) {
+		$url = $bp->members->nav->orders->slug;
+	} else {
+		$url = $bp->bp_nav['orders']['slug'];
+	}
+
+
+	bp_core_new_subnav_item(
+		array(
+			'name' => __('My Subscriptions', 'kleo_framework'),
+			'slug' => 'my-subscriptions',
+			'parent_url' => $bp->loggedin_user->domain  . $url . '/',
+			'parent_slug' => $url,
+			'position' => 15,
+			'show_for_displayed_user' => false,
+			'screen_function' => 'mtollwc_kleo_woo_subscriptions_screen',
+		));
+
+	bp_core_new_subnav_item(
+		array(
+			'name' => __('Payment Methods', 'kleo_framework'),
+			'slug' => 'payment-methods',
+			'parent_url' => $bp->loggedin_user->domain  . $url . '/',
+			'parent_slug' => $url,
+			'position' => 40,
+			'show_for_displayed_user' => false,
+			'screen_function' => 'mtollwc_kleo_woo_pay_methods_screen'
+		));
+}
+
+// Load My Subscriptions template
+function mtollwc_kleo_woo_subscriptions_screen() {
+	add_action( 'bp_template_content', 'mtollwc_kleo_woo_subscriptions_screen_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+// Display My Subscriptions screen
+function mtollwc_kleo_woo_subscriptions_screen_content() {
+	echo '<div class="woocommerce">';
+//	wc_get_template( 'myaccount/my-orders.php' );
+	echo '</div>';
+}
+
+// Load Payment Methods template
+function mtollwc_kleo_woo_pay_methods_screen() {
+	add_action( 'bp_template_content', 'mtollwc_kleo_woo_pay_methods_screen_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+// Display Payment Methods screen
+function mtollwc_kleo_woo_pay_methods_screen_content() {
+	echo '<div class="woocommerce">';
+	wc_get_template( 'myaccount/payment-methods.php' );
+	echo '</div>';
+}
