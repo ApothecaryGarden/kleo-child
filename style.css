@@ -16,18 +16,13 @@ Please add your custom styles below
 h4.widget-title {
 position: relative
 }
-a#user-activity { 
-display: none !important;
-}
-a#user-media {
-display: none !important;
+#profile-personal-li,
+#courses-personal-li,
+#media-personal-li { 
+display: none;
 }
 
 a#change-cover-image {
-display: none !important;
-}
-
-#profile-personal-li{
 display: none !important;
 }
 .bp-user .bp-full-width-profile {
