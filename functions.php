@@ -14,9 +14,9 @@
 add_action( 'after_setup_theme', 'wcamp_sensei', 10 );
 
 function wcamp_sensei() {
-	remove_action( 'sensei_single_course_modules_before', array( Sensei()->modules, 'course_modules_title' ), 20 );
+//	remove_action( 'sensei_single_course_modules_before', array( Sensei()->modules, 'course_modules_title' ), 20 );
 }
-
+/*
 function kleo_comment_form( $args = array(), $post_id = null ) {
     global $id;
 
@@ -68,7 +68,7 @@ function kleo_comment_form( $args = array(), $post_id = null ) {
     <?php
     endif;
 }
-
+*/
 // Add submenus to Orders tab
 add_action( 'bp_setup_nav', 'mtollwc_kleo_woo_order_submenus' , 302 );
 function mtollwc_kleo_woo_order_submenus() {
@@ -128,3 +128,19 @@ function mtollwc_kleo_woo_pay_methods_screen_content() {
 	wc_get_template( 'myaccount/payment-methods.php' );
 	echo '</div>';
 }
+
+// Display the content and reviews outside of tabs for single products
+add_action( 'woocommerce_after_single_product_summary', 'mtollwc_woo_content_and_reviews', 20 );
+function mtollwc_woo_content_and_reviews() { 
+//    the_content();
+    wc_get_template( 'single-product/tabs/description.php' );
+    comments_template( '', true ); 
+}
+// Destroy the single product tabs
+add_filter( 'woocommerce_product_tabs', 'mtollwc_woocommerce_product_tabs', 10, 1 );
+function mtollwc_woocommerce_product_tabs( $tabs = array() ){
+    $tabs = '';
+    return $tabs;
+}
+
+
